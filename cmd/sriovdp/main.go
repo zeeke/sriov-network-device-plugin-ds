@@ -19,6 +19,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/golang/glog"
 )
@@ -88,6 +89,11 @@ func main() {
 	if err := rm.stopAllServers(); err != nil {
 		glog.Errorf("stopping servers produced error: %s", err.Error())
 	}
+
+	glog.Infof("Sleeping 20 seconds")
+	time.Sleep(20*time.Second)
+	glog.Infof("Slept")
+
 	if err := rm.cleanupCDISpecs(); err != nil {
 		glog.Errorf("cleaning up CDI Specs produced error: %s", err.Error())
 	}
