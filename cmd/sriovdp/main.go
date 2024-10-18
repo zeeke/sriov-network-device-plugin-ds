@@ -16,6 +16,7 @@ package main
 
 import (
 	"flag"
+	"math/rand"
 	"os"
 	"os/signal"
 	"syscall"
@@ -90,8 +91,9 @@ func main() {
 		glog.Errorf("stopping servers produced error: %s", err.Error())
 	}
 
-	glog.Infof("Sleeping 20 seconds")
-	time.Sleep(20*time.Second)
+	sleepTime := rand.Intn(30)
+	glog.Infof("Sleeping %d seconds", sleepTime)
+	time.Sleep(time.Duration(sleepTime)*time.Second)
 	glog.Infof("Slept")
 
 	if err := rm.cleanupCDISpecs(); err != nil {
